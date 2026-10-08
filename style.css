@@ -1,0 +1,86 @@
+:root {
+  --page-background: #ffffff;
+  --animation-duration: 1200ms;
+  --animation-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--page-background);
+}
+
+.landing {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: 40px 24px;
+}
+
+.brand {
+  display: flex;
+  width: min(520px, 76vw);
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.brandmark {
+  width: clamp(112px, 22vw, 176px);
+  margin-bottom: clamp(26px, 5vw, 40px);
+}
+
+.wordmark {
+  width: min(420px, 100%);
+}
+
+.descriptor {
+  width: min(420px, 100%);
+  margin-top: clamp(10px, 2vw, 14px);
+}
+
+.fade-in {
+  animation: fadeIn var(--animation-duration) var(--animation-ease) forwards;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.fade-in-brandmark {
+  animation-delay: 0ms;
+}
+
+.fade-in-wordmark {
+  animation-delay: 850ms;
+}
+
+.fade-in-descriptor {
+  animation-delay: 1550ms;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
