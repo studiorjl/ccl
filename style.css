@@ -27,6 +27,7 @@ body {
 
 .brand {
   display: flex;
+  overflow: visible;
   width: min(520px, 76vw);
   flex-direction: column;
   align-items: center;
@@ -39,7 +40,9 @@ body {
 }
 
 .brandmark {
-  width: clamp(112px, 22vw, 176px);
+  width: clamp(150px, 24vw, 190px);
+  height: auto;
+  object-fit: contain;
   margin-bottom: clamp(26px, 5vw, 40px);
 }
 
