@@ -141,4 +141,10 @@ body {
     opacity: 1;
     transform: none;
   }
+
+  .logo-face {
+    animation: none;
+    fill: #09253f;
+    stroke-dashoffset: 0;
+  }
 }
