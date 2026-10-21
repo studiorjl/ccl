@@ -46,6 +46,61 @@ body {
   margin-bottom: clamp(26px, 5vw, 40px);
 }
 
+.animated-brandmark {
+  overflow: visible;
+}
+
+.logo-face {
+  fill: transparent;
+  stroke: #09253f;
+  stroke-width: 0.65;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation:
+    trace-face 900ms var(--animation-ease) forwards,
+    fill-face 260ms ease-out forwards;
+}
+
+.face-top {
+  animation-delay: 0ms, 720ms;
+}
+
+.face-left {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation:
+    trace-face 900ms var(--animation-ease) 780ms forwards,
+    fill-face 260ms ease-out 1500ms forwards,
+    fold-face 700ms var(--animation-ease) 780ms both;
+}
+
+.face-right {
+  animation-delay: 1560ms, 2280ms;
+}
+
+@keyframes trace-face {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill-face {
+  to {
+    fill: #09253f;
+  }
+}
+
+@keyframes fold-face {
+  0% {
+    transform: scaleY(0.08);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
 .wordmark {
   width: min(420px, 100%);
 }
