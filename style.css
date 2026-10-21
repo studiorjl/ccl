@@ -54,7 +54,7 @@ body {
   fill: #09253f;
   stroke: none;
   opacity: 0;
-  animation: face-fade 650ms ease-out forwards;
+  animation: face-fade 325ms ease-out forwards;
 }
 
 .face-top {
@@ -62,11 +62,11 @@ body {
 }
 
 .face-left {
-  animation-delay: 520ms;
+  animation-delay: 260ms;
 }
 
 .face-right {
-  animation-delay: 1040ms;
+  animation-delay: 520ms;
 }
 
 @keyframes face-fade {
