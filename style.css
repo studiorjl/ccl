@@ -51,53 +51,27 @@ body {
 }
 
 .logo-face {
-  fill: transparent;
-  stroke: #09253f;
-  stroke-width: 0.65;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  stroke-dasharray: 160;
-  stroke-dashoffset: 160;
-  animation:
-    trace-face 900ms var(--animation-ease) forwards,
-    fill-face 260ms ease-out forwards;
+  fill: #09253f;
+  stroke: none;
+  opacity: 0;
+  animation: face-fade 650ms ease-out forwards;
 }
 
 .face-top {
-  animation-delay: 0ms, 720ms;
+  animation-delay: 0ms;
 }
 
 .face-left {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  animation:
-    trace-face 900ms var(--animation-ease) 780ms forwards,
-    fill-face 260ms ease-out 1500ms forwards,
-    fold-face 700ms var(--animation-ease) 780ms both;
+  animation-delay: 520ms;
 }
 
 .face-right {
-  animation-delay: 1560ms, 2280ms;
+  animation-delay: 1040ms;
 }
 
-@keyframes trace-face {
+@keyframes face-fade {
   to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes fill-face {
-  to {
-    fill: #09253f;
-  }
-}
-
-@keyframes fold-face {
-  0% {
-    transform: scaleY(0.08);
-  }
-  100% {
-    transform: scaleY(1);
+    opacity: 1;
   }
 }
 
@@ -106,8 +80,8 @@ body {
 }
 
 .descriptor {
-  width: min(420px, 100%);
-  margin-top: clamp(10px, 2vw, 14px);
+  width: min(315px, 75%);
+  margin-top: clamp(8px, 1.5vw, 12px);
 }
 
 .fade-in {
@@ -121,11 +95,11 @@ body {
 }
 
 .fade-in-wordmark {
-  animation-delay: 850ms;
+  animation-delay: 1650ms;
 }
 
 .fade-in-descriptor {
-  animation-delay: 1550ms;
+  animation-delay: 2150ms;
 }
 
 @keyframes fadeIn {
@@ -145,6 +119,6 @@ body {
   .logo-face {
     animation: none;
     fill: #09253f;
-    stroke-dashoffset: 0;
+    opacity: 1;
   }
 }
