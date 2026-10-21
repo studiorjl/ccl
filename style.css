@@ -58,15 +58,15 @@ body {
 }
 
 .face-top {
-  animation-delay: 0ms;
+  animation-delay: 220ms;
 }
 
 .face-left {
-  animation-delay: 260ms;
+  animation-delay: 480ms;
 }
 
 .face-right {
-  animation-delay: 520ms;
+  animation-delay: 740ms;
 }
 
 @keyframes face-fade {
