@@ -32,3 +32,18 @@
  .launch-overlay .intro-mark,.launch-overlay .intro-wordmark,.launch-overlay .intro-descriptor{animation:none!important;opacity:1!important}
  .launch-transition{overflow:auto}
 }
+
+/* Projects index and project-detail image gallery */
+.projects-page{max-width:none;padding-left:clamp(20px,4vw,56px);padding-right:clamp(20px,4vw,56px)}
+.projects-page>.eyebrow{margin-bottom:16px}
+.projects-page>h1{margin-bottom:44px}
+.project-list{padding:0 0 40px;gap:16px}
+.project-list .card-image{aspect-ratio:4/3}
+.project-detail{padding-top:76px}
+.project-detail-intro{max-width:1000px;margin:0 auto;padding:clamp(100px,16vh,170px) 24px 48px}
+.project-detail-intro h1{font-size:clamp(38px,7vw,76px);font-weight:400;letter-spacing:-.04em;margin:0}
+.project-gallery{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 clamp(20px,4vw,56px) 72px;scroll-snap-type:x mandatory}
+.project-gallery:empty{min-height:0}
+.project-gallery>*{flex:0 0 min(72vw,760px);scroll-snap-align:start}
+.project-gallery img{display:block;width:100%;height:auto;object-fit:cover}
+@media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}}
