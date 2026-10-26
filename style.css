@@ -69,3 +69,7 @@ body,input,textarea,button{font-family:"Montserrat","Avenir Next",Avenir,"Centur
 .contact-submit{align-self:flex-start;min-width:130px;padding:14px 24px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;transition:background .2s ease,color .2s ease}
 .contact-submit:hover,.contact-submit:focus-visible{background:transparent;color:var(--navy)}
 .form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+
+/* Keep display headings in the original face; use the geometric sans only for copy and labels. */
+.home-intro h1,.page-content h1,.project-detail-intro h1{font-family:Georgia,"Times New Roman",serif}
+.home-intro h1{font-size:clamp(32px,5.4vw,64px);max-width:860px;text-wrap:balance}
