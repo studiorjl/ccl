@@ -55,9 +55,9 @@
 @media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}}
 
 /* Typography: geometric sans-serif system stack, Gotham-adjacent. */
-:root{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif}
-body,input,textarea,button{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif}
-.card-label{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif;font-weight:500;letter-spacing:.005em}
+:root{font-family:Arial,Helvetica,sans-serif}
+body,input,textarea,button{font-family:Arial,Helvetica,sans-serif}
+
 .page-content p,.home-intro>p:last-child{font-weight:400;line-height:1.7}
 .contact-page>p{margin-bottom:32px}
 .contact-form{max-width:620px;display:flex;flex-direction:column;gap:24px}
@@ -70,6 +70,4 @@ body,input,textarea,button{font-family:"Montserrat","Avenir Next",Avenir,"Centur
 .contact-submit:hover,.contact-submit:focus-visible{background:transparent;color:var(--navy)}
 .form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
 
-/* Keep display headings in the original face; use the geometric sans only for copy and labels. */
-.home-intro h1,.page-content h1,.project-detail-intro h1{font-family:Georgia,"Times New Roman",serif}
 .home-intro h1{font-size:clamp(32px,5.4vw,64px);max-width:860px;text-wrap:balance}
