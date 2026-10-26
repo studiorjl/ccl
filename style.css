@@ -4,9 +4,9 @@
 .splash-only .intro{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background-color:#072033;background-image:url('/assets/ccl-background.png');background-size:cover;background-position:center;animation:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
 .splash-only .intro-brand{width:min(520px,78vw);display:flex;flex-direction:column;align-items:center;gap:clamp(16px,3vh,28px)}
 .splash-only .intro-brand img{display:block;height:auto;max-width:100%;filter:brightness(0) invert(1);opacity:0}
-.splash-only .intro-mark{width:clamp(100px,15vw,160px);animation:ccl-fade-in 700ms ease-out .25s both}
-.splash-only .intro-wordmark{width:min(100%,500px);animation:ccl-fade-in 650ms ease-out 1.15s both}
-.splash-only .intro-descriptor{width:min(75%,360px);animation:ccl-fade-in 650ms ease-out 2.05s both}
+.splash-only .intro-mark{width:clamp(100px,15vw,160px);animation:ccl-fade-in 350ms ease-out .125s both}
+.splash-only .intro-wordmark{width:min(100%,500px);animation:ccl-fade-in 325ms ease-out .575s both}
+.splash-only .intro-descriptor{width:min(75%,360px);animation:ccl-fade-in 325ms ease-out 1.025s both}
 @keyframes ccl-fade-in{from{opacity:0}to{opacity:1}}
 .splash-menu{position:fixed;top:24px;right:clamp(20px,4vw,56px);z-index:20}
 .splash-menu summary{width:42px;height:42px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;list-style:none;cursor:pointer}
