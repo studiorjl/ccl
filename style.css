@@ -53,3 +53,19 @@
 .project-gallery>*{flex:0 0 min(72vw,760px);scroll-snap-align:start}
 .project-gallery img{display:block;width:100%;height:auto;object-fit:cover}
 @media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}}
+
+/* Typography: geometric sans-serif system stack, Gotham-adjacent. */
+:root{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif}
+body,input,textarea,button{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif}
+.card-label{font-family:"Montserrat","Avenir Next",Avenir,"Century Gothic",Arial,sans-serif;font-weight:500;letter-spacing:.005em}
+.page-content p,.home-intro>p:last-child{font-weight:400;line-height:1.7}
+.contact-page>p{margin-bottom:32px}
+.contact-form{max-width:620px;display:flex;flex-direction:column;gap:24px}
+.form-field{display:flex;flex-direction:column;gap:9px}
+.form-field label{font-size:13px;letter-spacing:.04em}
+.form-field input,.form-field textarea{width:100%;border:1px solid rgba(7,32,51,.3);border-radius:0;background:transparent;padding:14px 15px;color:var(--navy);font:inherit;font-size:16px;outline-offset:3px}
+.form-field input:focus,.form-field textarea:focus{outline:2px solid var(--navy);border-color:var(--navy)}
+.form-field textarea{resize:vertical;min-height:140px}
+.contact-submit{align-self:flex-start;min-width:130px;padding:14px 24px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;transition:background .2s ease,color .2s ease}
+.contact-submit:hover,.contact-submit:focus-visible{background:transparent;color:var(--navy)}
+.form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
