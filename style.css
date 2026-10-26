@@ -19,3 +19,28 @@
 .splash-menu-panel a span{font-size:14px}
 @media(max-width:700px){.splash-only .intro{background-image:url('/assets/ccl-background-portrait.png')}.splash-only .intro-brand{width:min(82vw,420px)}.splash-only .intro-mark{width:clamp(100px,25vw,140px)}.splash-menu{top:14px;right:18px}}
 @media(prefers-reduced-motion:reduce){.splash-only .intro-mark,.splash-only .intro-wordmark,.splash-only .intro-descriptor{animation:none;opacity:1}}
+
+/* Explicit single-image arrival: the cube PNG is one element, never per-face SVG animation. */
+.splash-only .intro-mark {
+  animation: ccl-mark-arrival 700ms ease-out 250ms both !important;
+  opacity: 0;
+  filter: brightness(0) invert(1);
+}
+@keyframes ccl-mark-arrival {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.splash-only .intro-wordmark {
+  animation: asset-in 500ms ease-out 1.1s both !important;
+}
+.splash-only .intro-descriptor {
+  animation: asset-in 500ms ease-out 1.7s both !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .splash-only .intro-mark,
+  .splash-only .intro-wordmark,
+  .splash-only .intro-descriptor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
