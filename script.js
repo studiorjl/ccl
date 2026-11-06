@@ -57,11 +57,13 @@
             observer.unobserve(entry.target);
             reveal(entry.target, index * 80);
           });
-      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.1 })
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
     : null;
 
   const arm = () => {
-    const fold = window.innerHeight * 0.94;
+    // anything actually on screen right now is revealed straight away, in
+    // order. Only what is genuinely below the fold waits for the scroll.
+    const fold = window.innerHeight;
     const above = [];
     const below = [];
     items.forEach((el) => {
@@ -78,5 +80,5 @@
 
   window.setTimeout(arm, start);
   // safety net: nothing stays invisible because it missed its cue
-  window.setTimeout(() => items.forEach((el) => el.classList.add('is-in')), start + 6000);
+  window.setTimeout(() => items.forEach((el) => el.classList.add('is-in')), start + 4000);
 })();
