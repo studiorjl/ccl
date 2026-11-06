@@ -105,4 +105,24 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 
 /* Rebrand announcement under the home page title */
 .rebrand-note{font-style:italic;font-weight:300;font-size:clamp(14px,1.35vw,16px);line-height:1.6;
-  max-width:540px;margin:0 auto 26px;color:rgba(7,32,51,.82);letter-spacing:var(--body-tracking)}
+  max-width:min(680px,100%);margin:0 auto 26px;color:rgba(7,32,51,.82);letter-spacing:var(--body-tracking)}
+
+/* Pinnacle Places card. Same anatomy as the destination cards below: a panel
+   that floods navy on hover, with the label and CCL arrow beneath it. The
+   wordmark is the client's own SVG, tinted through a mask so it can flip from
+   navy to cream without needing a second file. */
+.pinnacle-card{display:block;width:min(340px,100%);margin:0 auto 30px;text-decoration:none}
+.pinnacle-panel{display:grid;place-items:center;position:relative;overflow:hidden;aspect-ratio:16/9;
+  background:linear-gradient(145deg,#f5f1e8,#e3dccd)}
+.pinnacle-panel:after{content:'';position:absolute;inset:0;background:var(--navy);opacity:0;
+  transition:opacity .25s var(--ease)}
+.pinnacle-card:hover .pinnacle-panel:after,.pinnacle-card:focus-visible .pinnacle-panel:after{opacity:.94}
+.pinnacle-logo{position:relative;z-index:1;width:62%;aspect-ratio:277/105.08;background-color:var(--navy);
+  -webkit-mask:url('/assets/pinnacle-places-wordmark.svg') center/contain no-repeat;
+  mask:url('/assets/pinnacle-places-wordmark.svg') center/contain no-repeat;
+  transition:background-color .25s var(--ease)}
+.pinnacle-card:hover .pinnacle-logo,.pinnacle-card:focus-visible .pinnacle-logo{background-color:#FBF6EA}
+.pinnacle-card .card-label{padding:14px 0 0}
+/* the lede now sits below the card, so give it room to run on one line */
+.home-intro>p:last-child{max-width:780px}
+@media(max-width:700px){.pinnacle-card{width:100%}.pinnacle-card .card-label{padding-top:12px}}
