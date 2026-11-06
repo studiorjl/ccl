@@ -86,20 +86,20 @@
   font-family:var(--font-body)
 }
 body,input,textarea,button{font-family:var(--font-body);letter-spacing:var(--body-tracking)}
-.card-label,.form-field label,.site-footer{font-weight:300}
+.card-label,.site-footer{font-weight:300}
 h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spacing:var(--heading-tracking);line-height:var(--heading-leading)}
 
 .page-content p,.home-intro>p:last-child{font-weight:300;line-height:1.7}
 .contact-page>p{margin-bottom:32px}
-.contact-form{max-width:620px;display:flex;flex-direction:column;gap:24px}
-.form-field{display:flex;flex-direction:column;gap:9px}
-.form-field label{font-size:13px;letter-spacing:.04em}
-.form-field input,.form-field textarea{width:100%;border:1px solid rgba(7,32,51,.3);border-radius:0;background:transparent;padding:14px 15px;color:var(--navy);font:inherit;font-size:16px;outline-offset:3px}
-.form-field input:focus,.form-field textarea:focus{outline:2px solid var(--navy);border-color:var(--navy)}
-.form-field textarea{resize:vertical;min-height:140px}
+
+
+
+
+
+
 .contact-submit{align-self:flex-start;min-width:130px;padding:14px 24px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;transition:background .2s ease,color .2s ease}
 .contact-submit:hover,.contact-submit:focus-visible{background:transparent;color:var(--navy)}
-.form-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+
 
 .home-intro h1{font-size:clamp(32px,5.4vw,64px);max-width:860px;text-wrap:balance}
 
@@ -126,3 +126,8 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 /* the lede now sits below the card, so give it room to run on one line */
 .home-intro>p:last-child{max-width:780px}
 @media(max-width:700px){.pinnacle-card{width:100%}.pinnacle-card .card-label{padding-top:12px}}
+
+/* Contact page now points at Pinnacle Places instead of posting a form.
+   The submit rule above is reused, so the button keeps its CCL treatment;
+   these few lines let an anchor behave like the button it replaced. */
+.contact-submit{display:inline-block;text-align:center;text-decoration:none;line-height:1.2}
