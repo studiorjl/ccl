@@ -177,19 +177,19 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 .contact-address{margin:0 0 24px;font-size:clamp(15px,1.5vw,18px)}
 .contact-address a{text-underline-offset:5px}
 
-/* Director profile. The bio sits on the right and keeps the line breaks
-   exactly as written, with the LinkedIn link holding the left column. */
+/* Director profile. The bio holds the left column and keeps the line breaks
+   exactly as written, with the LinkedIn link aligned to the right. */
 .page-content.profile-page{max-width:1240px}
-.profile-grid{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);column-gap:clamp(28px,5vw,72px);row-gap:26px;align-items:start}
-.page-content .profile-name{grid-column:2;grid-row:1;margin:0;max-width:none;text-align:right;font-size:clamp(17px,1.8vw,21px);line-height:1.55;font-weight:400}
+.profile-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,170px);column-gap:clamp(28px,5vw,72px);row-gap:26px;align-items:start}
+.page-content .profile-name{grid-column:1;grid-row:1;margin:0;max-width:none;text-align:left;font-size:clamp(17px,1.8vw,21px);line-height:1.55;font-weight:400}
 .page-content .profile-name strong{font-weight:600}
-.page-content .profile-bio{grid-column:2;grid-row:2;margin:0;max-width:790px;justify-self:end;text-align:right;line-height:1.75;font-weight:300}
-.page-content .profile-link{grid-column:1;grid-row:1;margin:0;padding-top:6px;max-width:none}
+.page-content .profile-bio{grid-column:1;grid-row:2;margin:0;max-width:790px;justify-self:start;text-align:left;line-height:1.75;font-weight:300}
+.page-content .profile-link{grid-column:2;grid-row:1;margin:0;padding-top:6px;max-width:none;text-align:right;justify-self:end}
 .profile-link b{font-weight:400}
 @media(max-width:820px){
 .profile-grid{grid-template-columns:1fr;row-gap:22px}
 .page-content .profile-name,.page-content .profile-bio,.page-content .profile-link{grid-column:1;justify-self:stretch;max-width:none}
 .page-content .profile-name{grid-row:1}
 .page-content .profile-bio{grid-row:2}
-.page-content .profile-link{grid-row:3;padding-top:0}
+.page-content .profile-link{grid-row:3;padding-top:0;text-align:right}
 }
