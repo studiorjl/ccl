@@ -168,3 +168,11 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
    these few lines let an anchor behave like the button it replaced. */
 .contact-submit{display:inline-block;text-align:center;text-decoration:none;line-height:1.2}
 @media(max-width:700px){.pinnacle-card{width:100%}.pinnacle-card .card-label{padding-top:12px}}
+
+/* Business address. Kept as a plain line in the footer and on the contact
+   page so the address shown matches the Google Business Profile exactly,
+   and links through to the listing. */
+.site-footer>a.footer-address{font-weight:400;opacity:.72;text-decoration:none}
+.site-footer>a.footer-address:hover,.site-footer>a.footer-address:focus-visible{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.contact-address{margin:0 0 24px;font-size:clamp(15px,1.5vw,18px)}
+.contact-address a{text-underline-offset:5px}
