@@ -26,59 +26,153 @@
   if (year) year.textContent = new Date().getFullYear();
 })();
 
-// Home page entrance: the page settles in sequence instead of appearing at
-// once. Elements lift ~14px and fade. Only armed when this script runs, so
-// copy is never left hidden if JS fails, and skipped entirely for anyone who
-// prefers reduced motion.
+// Page entrance. Copy arrives line by line, following the order the eye
+// travels down the page, with a wider cadence between blocks so the page
+// feels like it is settling rather than firing. Headings and paragraphs are
+// measured into visual lines and each line rises and fades a beat after the
+// one above it. Nothing is hidden unless this script actually runs, anyone
+// who prefers reduced motion gets the page untouched, and a safety net
+// reveals everything if a cue is ever missed.
 (() => {
   const items = [...document.querySelectorAll('[data-reveal]')];
   if (!items.length) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  const LINE = 105;   // ms between one line and the next
+  const GAP = 90;     // extra breath between blocks and cards
+  const HOLD = 3400;  // the intro overlay holds the first screen this long
+
   document.body.classList.add('reveal-ready');
 
-  const reveal = (el, delay) => {
-    if (delay) el.style.transitionDelay = delay + 'ms';
-    el.classList.add('is-in');
-  };
-
-  // the intro overlay holds the first screen for ~4s, so the sequence would
-  // otherwise play out behind it and be missed entirely
   const overlay = document.querySelector('.intro');
-  const held = overlay && getComputedStyle(overlay).display !== 'none' && !overlay.classList.contains('done');
-  const start = held ? 3150 : 120;
+  const base = overlay && getComputedStyle(overlay).display !== 'none' ? HOLD : 120;
 
-  const observer = 'IntersectionObserver' in window
+  const fold = window.innerHeight;
+  const index = new Map(items.map((el, i) => [el, i]));
+
+  const observe = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries) => {
-        entries
+        const batch = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-          .forEach((entry, index) => {
-            observer.unobserve(entry.target);
-            reveal(entry.target, index * 80);
-          });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
+          .map((entry) => entry.target)
+          .sort((a, b) => index.get(a) - index.get(b));
+        batch.forEach((el) => observe.unobserve(el));
+        sequence(batch, 0);
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 })
     : null;
 
+  // ---- measuring and sequencing -----------------------------------------
+
+  const sequence = (list, start) => {
+    let cursor = start;
+    list.forEach((el) => {
+      cursor += reveal(el, cursor) * LINE + GAP;
+    });
+  };
+
+  const reveal = (el, start) => {
+    if (!el.classList.contains('rv-lines')) {
+      el.style.transitionDelay = start + 'ms';
+      el.classList.add('is-in');
+      return 1;
+    }
+    const words = [...el.querySelectorAll('.rv-w')];
+    if (!words.length) {
+      el.classList.add('is-in');
+      return 1;
+    }
+    let top = null;
+    let line = -1;
+    words.forEach((word) => {
+      const y = Math.round(word.getBoundingClientRect().top);
+      if (top === null || Math.abs(y - top) > 4) {
+        line += 1;
+        top = y;
+      }
+      word.style.transitionDelay = (start + line * LINE) + 'ms';
+    });
+    el.classList.add('is-in');
+    return line + 1;
+  };
+
+  // Wrap each word of a plain-text block so lines can be measured and then
+  // staggered. Blocks that hold other markup are left alone and fade whole.
+  const split = (el) => {
+    if (el.dataset.split === 'done' || el.children.length) return;
+    const text = el.textContent.replace(/\s+/g, ' ').trim();
+    if (!text) return;
+    el.dataset.text = text;
+    const frag = document.createDocumentFragment();
+    text.split(' ').forEach((word, i) => {
+      if (i) frag.appendChild(document.createTextNode(' '));
+      const span = document.createElement('span');
+      span.className = 'rv-w';
+      span.textContent = word;
+      frag.appendChild(span);
+    });
+    el.replaceChildren(frag);
+    el.dataset.split = 'done';
+    el.classList.add('rv-lines');
+  };
+
   const arm = () => {
-    // anything actually on screen right now is revealed straight away, in
-    // order. Only what is genuinely below the fold waits for the scroll.
-    const fold = window.innerHeight;
     const above = [];
     const below = [];
     items.forEach((el) => {
       const box = el.getBoundingClientRect();
       (box.top < fold && box.bottom > 0 ? above : below).push(el);
     });
-    above.forEach((el, index) => reveal(el, index * 90));
-    if (!observer) {
-      below.forEach((el) => reveal(el, 0));
+    sequence(above, base);
+    if (!observe) {
+      below.forEach((el) => {
+        el.style.transitionDelay = '0ms';
+        el.classList.add('is-in');
+      });
       return;
     }
-    below.forEach((el) => observer.observe(el));
+    below.forEach((el) => observe.observe(el));
   };
 
-  window.setTimeout(arm, start);
-  // safety net: nothing stays invisible because it missed its cue
-  window.setTimeout(() => items.forEach((el) => el.classList.add('is-in')), start + 4000);
+  // Re-measure after a resize so lines stay true instead of drifting. The
+  // page is already revealed by then, so things land without replaying.
+  let width = window.innerWidth;
+  let timer = null;
+  window.addEventListener('resize', () => {
+    if (Math.abs(window.innerWidth - width) < 24) return;
+    width = window.innerWidth;
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      items.forEach((el) => {
+        if (!el.classList.contains('rv-lines') || !el.dataset.text) return;
+        el.textContent = el.dataset.text;
+        el.dataset.split = '';
+        el.classList.remove('rv-lines');
+        split(el);
+        el.querySelectorAll('.rv-w').forEach((word) => {
+          word.style.transitionDelay = '0ms';
+        });
+        el.classList.add('is-in');
+      });
+    }, 280);
+  });
+
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    items.forEach(split);
+    window.setTimeout(arm, 30);
+    window.setTimeout(() => {
+      items.forEach((el) => el.classList.add('is-in'));
+    }, base + 7000);
+  };
+
+  // measure once the type is in place, with a fallback in case the font
+  // promise never settles
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(start);
+    window.setTimeout(start, 1400);
+  } else {
+    start();
+  }
 })();

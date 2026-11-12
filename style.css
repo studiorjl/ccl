@@ -139,14 +139,28 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 .home-intro{padding-bottom:34px}
 
 /* ---- entrance ---------------------------------------------------------
-   Body copy arrives in sequence rather than all at once: each element lifts
-   a few pixels and settles. Only armed when JS runs (body.reveal-ready), so
-   nothing is ever hidden if the script fails. */
-.reveal-ready [data-reveal]{opacity:0;transform:translateY(14px);
-  transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.reveal-ready [data-reveal].is-in{opacity:1;transform:none}
+   Copy settles line by line, down the page and then across. Headings and
+   paragraphs are split into measured lines by script.js, so each line lifts
+   and fades a beat after the one above it; cards, panels and images arrive
+   as whole blocks. Only armed when the script runs (body.reveal-ready), so
+   nothing is ever hidden if it fails. */
+.reveal-ready [data-reveal]:not(.rv-lines){opacity:0;transform:translateY(18px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal-ready [data-reveal]:not(.rv-lines).is-in{opacity:1;transform:none}
+
+/* a word inside a measured line. inline-block so it can carry a transform
+   without disturbing the wrap the browser has already chosen. */
+.reveal-ready .rv-w{display:inline-block;opacity:0;transform:translateY(.42em);
+  transition:opacity .95s var(--ease),transform .95s var(--ease)}
+.reveal-ready .rv-lines.is-in .rv-w{opacity:1;transform:none}
+
+/* the rebrand lead needs its own box so it can arrive ahead of the line
+   beneath it rather than glued to it */
+.rebrand-lead{display:inline-block}
+
 @media(prefers-reduced-motion:reduce){
   .reveal-ready [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+  .reveal-ready .rv-w{opacity:1!important;transform:none!important;transition:none!important}
 }
 
 /* Contact page now points at Pinnacle Places instead of posting a form.
