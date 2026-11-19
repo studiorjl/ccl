@@ -213,6 +213,9 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 .page-content .profile-link{grid-column:1/-1;justify-self:start;text-align:left}
 }
 @media(max-width:520px){
+/* phones keep the stacked portrait but take a roomier side inset, so the page
+   breathes the way the desktop measure does */
+.page-content.profile-page{padding-left:clamp(28px,8.2vw,40px);padding-right:clamp(28px,8.2vw,40px)}
 .profile-intro{grid-template-columns:1fr;row-gap:18px}
 .profile-photo{width:112px;top:0}
 .page-content .profile-bio{margin-left:0}
