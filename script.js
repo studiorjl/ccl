@@ -63,14 +63,19 @@
 
   // ---- measuring and sequencing -----------------------------------------
 
+  // Cadence. Each block carries its own beat: the defaults below, or the
+  // step and gap an element declares with data-reveal-step / data-reveal-gap
+  // when a page needs a slower, more deliberate cascade.
   const sequence = (list, start) => {
     let cursor = start;
     list.forEach((el) => {
-      cursor += reveal(el, cursor) * LINE + GAP;
+      const step = Number(el.dataset.revealStep) || LINE;
+      const gap = el.dataset.revealGap != null ? Number(el.dataset.revealGap) : GAP;
+      cursor += reveal(el, cursor, step) * step + gap;
     });
   };
 
-  const reveal = (el, start) => {
+  const reveal = (el, start, step = LINE) => {
     if (!el.classList.contains('rv-lines')) {
       el.style.transitionDelay = start + 'ms';
       el.classList.add('is-in');
@@ -81,34 +86,59 @@
       el.classList.add('is-in');
       return 1;
     }
+    // Group the wrapped words into the visual lines the browser chose, then
+    // hand each line its own beat.
+    const lines = [];
     let top = null;
-    let line = -1;
     words.forEach((word) => {
       const y = Math.round(word.getBoundingClientRect().top);
       if (top === null || Math.abs(y - top) > 4) {
-        line += 1;
+        lines.push([]);
         top = y;
       }
-      word.style.transitionDelay = (start + line * LINE) + 'ms';
+      lines[lines.length - 1].push(word);
+    });
+    // A long block tightens its own cadence so a twenty five line paragraph
+    // still settles in a breath or two instead of crawling down the page.
+    const span = Number(el.dataset.revealSpan) || 1700;
+    const beat = lines.length * step > span ? span / lines.length : step;
+    lines.forEach((line, i) => {
+      line.forEach((word) => {
+        word.style.transitionDelay = Math.round(start + i * beat) + 'ms';
+      });
     });
     el.classList.add('is-in');
-    return line + 1;
+    return lines.length;
   };
 
   // Wrap each word of a plain-text block so lines can be measured and then
   // staggered. Blocks that hold other markup are left alone and fade whole.
   const split = (el) => {
-    if (el.dataset.split === 'done' || el.children.length) return;
+    if (el.dataset.split === 'done') return;
+    // Blocks that hold real markup are left alone and fade whole, but a block
+    // whose only markup is <br> keeps those breaks: the copy was written with
+    // them, so the words are wrapped line by line and the breaks go back in.
+    const breaks = [...el.children].every((child) => child.tagName === 'BR');
+    if (el.children.length && !breaks) return;
     const text = el.textContent.replace(/\s+/g, ' ').trim();
     if (!text) return;
+    el.dataset.html = el.innerHTML;
     el.dataset.text = text;
     const frag = document.createDocumentFragment();
-    text.split(' ').forEach((word, i) => {
-      if (i) frag.appendChild(document.createTextNode(' '));
-      const span = document.createElement('span');
-      span.className = 'rv-w';
-      span.textContent = word;
-      frag.appendChild(span);
+    [...el.childNodes].forEach((node) => {
+      if (node.nodeType === 1) {
+        frag.appendChild(node.cloneNode(false));
+        return;
+      }
+      const words = node.textContent.replace(/\s+/g, ' ').trim();
+      if (!words) return;
+      words.split(' ').forEach((word, i) => {
+        if (i) frag.appendChild(document.createTextNode(' '));
+        const span = document.createElement('span');
+        span.className = 'rv-w';
+        span.textContent = word;
+        frag.appendChild(span);
+      });
     });
     el.replaceChildren(frag);
     el.dataset.split = 'done';
@@ -144,7 +174,8 @@
     timer = window.setTimeout(() => {
       items.forEach((el) => {
         if (!el.classList.contains('rv-lines') || !el.dataset.text) return;
-        el.textContent = el.dataset.text;
+        if (el.dataset.html != null) el.innerHTML = el.dataset.html;
+        else el.textContent = el.dataset.text;
         el.dataset.split = '';
         el.classList.remove('rv-lines');
         split(el);

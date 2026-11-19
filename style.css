@@ -192,12 +192,14 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 
 /* Director profile. The portrait sits under the heading with the name and role
    beside it, and the bio runs beneath them, held to the left edge. */
-.page-content.profile-page{max-width:1240px}
-.profile-intro{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:clamp(24px,4vw,48px);align-items:center;margin:0 0 38px}
-.profile-photo{display:block;width:clamp(112px,13vw,160px);height:auto}
+.page-content.profile-page{max-width:1240px;--portrait:clamp(112px,13vw,160px);--portrait-gap:clamp(24px,4vw,48px)}
+.profile-intro{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--portrait-gap);align-items:center;margin:0 0 34px}
+.profile-photo{display:block;width:var(--portrait);height:auto}
 .page-content .profile-name{margin:0;max-width:none;text-align:left;font-size:clamp(17px,1.8vw,21px);line-height:1.55;font-weight:400}
 .page-content .profile-name strong{font-weight:600}
-.page-content .profile-bio{margin:0;max-width:790px;text-align:left;line-height:1.75;font-weight:300}
+/* the bio holds the name's column, so its first line starts under Cameron
+   Lamb rather than under the portrait */
+.page-content .profile-bio{margin:0 0 0 calc(var(--portrait) + var(--portrait-gap));max-width:790px;text-align:left;line-height:1.75;font-weight:300}
 .page-content .profile-link{margin:0;padding:0;max-width:none;text-align:right;justify-self:end}
 .profile-link b{font-weight:400}
 .profile-link .text-link{margin-top:0}
@@ -208,4 +210,5 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 @media(max-width:520px){
 .profile-intro{grid-template-columns:1fr;row-gap:18px}
 .profile-photo{width:112px}
+.page-content .profile-bio{margin-left:0}
 }
