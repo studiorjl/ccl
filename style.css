@@ -48,11 +48,19 @@
 .project-detail{padding-top:76px}
 .project-detail-intro{max-width:1000px;margin:0 auto;padding:clamp(100px,16vh,170px) 24px 48px}
 .project-detail-intro h1{font-size:clamp(38px,7vw,76px);font-weight:400;letter-spacing:var(--heading-tracking);margin:0}
-.project-gallery{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 clamp(20px,4vw,56px) 72px;scroll-snap-type:x mandatory}
+.gallery{position:relative}
+.project-gallery{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 clamp(20px,4vw,56px) 84px;scroll-snap-type:x mandatory;scroll-padding-inline:clamp(20px,4vw,56px)}
+.project-gallery:focus-visible{outline:2px solid var(--navy);outline-offset:-4px}
+.gallery-nav{position:absolute;right:clamp(20px,4vw,56px);bottom:18px;display:flex;gap:10px}
+.gallery-nav[hidden]{display:none}
+.gallery-arrow{width:44px;height:44px;display:grid;place-content:center;border:1px solid rgba(7,32,51,.26);border-radius:50%;background:transparent;color:var(--navy);font:inherit;font-size:17px;line-height:1;cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),opacity .25s ease}
+.gallery-arrow:hover,.gallery-arrow:focus-visible{background:var(--navy);border-color:var(--navy);color:var(--paper)}
+.gallery-arrow:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.gallery-arrow[disabled]{opacity:.26;cursor:default;background:transparent;border-color:rgba(7,32,51,.26);color:var(--navy)}
 .project-gallery:empty{min-height:0}
-.project-gallery>*{flex:0 0 min(72vw,760px);scroll-snap-align:start}
+.project-gallery>*{flex:0 0 min(72vw,760px);min-width:0;scroll-snap-align:start}
 .project-gallery img{display:block;width:100%;height:auto;object-fit:cover}
-@media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}}
+@media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}.gallery-arrow{width:40px;height:40px;font-size:16px}}
 
 /* Typography: geometric sans-serif system stack, Gotham-adjacent. */
 /* Typography tokens.

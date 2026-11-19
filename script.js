@@ -234,3 +234,40 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
   window.addEventListener('resize', place);
 })();
+
+// Project galleries: a left and right arrow pair that steps through the images
+// one card at a time. Arrows hide themselves when everything already fits, and
+// the track stays a native scroller, so swipe and trackpad still work.
+(() => {
+  document.querySelectorAll('.gallery').forEach((wrap) => {
+    const track = wrap.querySelector('.project-gallery');
+    const nav = wrap.querySelector('.gallery-nav');
+    const prev = wrap.querySelector('[data-gallery="prev"]');
+    const next = wrap.querySelector('[data-gallery="next"]');
+    if (!track || !nav || !prev || !next) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const step = () => {
+      const first = track.firstElementChild;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 16;
+      return first ? first.getBoundingClientRect().width + gap : Math.round(track.clientWidth * 0.8);
+    };
+    const go = (dir) => {
+      track.scrollBy({ left: dir * step(), behavior: reduced.matches ? 'auto' : 'smooth' });
+    };
+
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+
+    const state = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      nav.hidden = max <= 1;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+    };
+
+    track.addEventListener('scroll', state, { passive: true });
+    window.addEventListener('resize', state);
+    state();
+  });
+})();
