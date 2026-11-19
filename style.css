@@ -194,10 +194,13 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
    beside it, and the bio runs beneath them, held to the left edge. */
 /* The profile uses the site's own text measure, so its left edge lands on the
    same line as the contact page and the project pages. */
-.page-content.profile-page{--portrait:clamp(112px,13vw,160px);--portrait-gap:clamp(24px,4vw,48px)}
-.profile-intro{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--portrait-gap);align-items:center;margin:0 0 34px}
-.profile-photo{display:block;width:var(--portrait);height:auto}
-.page-content .profile-name{margin:0;max-width:none;text-align:left;font-size:clamp(17px,1.8vw,21px);line-height:1.55;font-weight:400}
+.page-content.profile-page{--portrait:clamp(112px,13vw,160px);--portrait-gap:clamp(24px,4vw,48px);--name-size:clamp(17px,1.8vw,21px);--name-lead:1.55;--intro-drop:34px}
+.profile-intro{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--portrait-gap);align-items:center;margin:0 0 var(--intro-drop)}
+/* The portrait hangs on the centre of the whitespace between the name block
+   and the paragraph, not on the name block itself: it overhangs that gap
+   evenly above and below. */
+.profile-photo{display:block;width:var(--portrait);height:auto;position:relative;top:calc((var(--portrait) + var(--name-size) * var(--name-lead) * 2 + var(--intro-drop) * 2) / 4)}
+.page-content .profile-name{margin:0;max-width:none;text-align:left;font-size:var(--name-size);line-height:var(--name-lead);font-weight:400}
 .page-content .profile-name strong{font-weight:600}
 /* the bio holds the name's column, so its first line starts under Cameron
    Lamb rather than under the portrait */
@@ -211,6 +214,6 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 }
 @media(max-width:520px){
 .profile-intro{grid-template-columns:1fr;row-gap:18px}
-.profile-photo{width:112px}
+.profile-photo{width:112px;top:0}
 .page-content .profile-bio{margin-left:0}
 }

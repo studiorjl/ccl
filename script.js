@@ -207,3 +207,30 @@
     start();
   }
 })();
+
+// The director portrait hangs on the centre of the whitespace between the
+// name block and the bio, so it overhangs that gap evenly above and below.
+// Measured rather than assumed: the name wraps at some widths and the columns
+// stack on phones, where the portrait simply sits above the name instead.
+(() => {
+  const photo = document.querySelector('.profile-photo');
+  const name = document.querySelector('.profile-name');
+  const bio = document.querySelector('.profile-bio');
+  if (!photo || !name || !bio) return;
+
+  const place = () => {
+    photo.style.top = '0px';
+    const stacked = name.offsetTop >= photo.offsetTop + photo.offsetHeight;
+    if (stacked) {
+      photo.style.top = '0px';
+      return;
+    }
+    const centre = photo.offsetTop + photo.offsetHeight / 2;
+    const gapCentre = (name.offsetTop + name.offsetHeight + bio.offsetTop) / 2;
+    photo.style.top = Math.round(gapCentre - centre) + 'px';
+  };
+
+  place();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+  window.addEventListener('resize', place);
+})();
