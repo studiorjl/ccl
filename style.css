@@ -192,7 +192,9 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 
 /* Director profile. The portrait sits under the heading with the name and role
    beside it, and the bio runs beneath them, held to the left edge. */
-.page-content.profile-page{max-width:1240px;--portrait:clamp(112px,13vw,160px);--portrait-gap:clamp(24px,4vw,48px)}
+/* The profile uses the site's own text measure, so its left edge lands on the
+   same line as the contact page and the project pages. */
+.page-content.profile-page{--portrait:clamp(112px,13vw,160px);--portrait-gap:clamp(24px,4vw,48px)}
 .profile-intro{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--portrait-gap);align-items:center;margin:0 0 34px}
 .profile-photo{display:block;width:var(--portrait);height:auto}
 .page-content .profile-name{margin:0;max-width:none;text-align:left;font-size:clamp(17px,1.8vw,21px);line-height:1.55;font-weight:400}
