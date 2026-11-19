@@ -169,6 +169,15 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
 .contact-submit{display:inline-block;text-align:center;text-decoration:none;line-height:1.2}
 @media(max-width:700px){.pinnacle-card{width:100%}.pinnacle-card .card-label{padding-top:12px}}
 
+/* Hover affordance. Every card keeps its label and arrow beneath the panel, so
+   the label itself underlines on hover and on keyboard focus. The panel
+   flooding navy is a slow read; the underline is immediate, and it is the
+   clearest signal that the label is the thing being pointed at. */
+.destination-card:hover .card-label,
+.destination-card:focus-visible .card-label,
+.pinnacle-card:hover .card-label,
+.pinnacle-card:focus-visible .card-label{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+
 /* Business address. Kept as a plain line in the footer so the address shown
    matches the Google Business Profile exactly, and links through to the
    listing. The contact page copy no longer repeats it. */
