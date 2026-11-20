@@ -48,6 +48,15 @@
 .project-detail{padding-top:76px}
 .project-detail-intro{max-width:1000px;margin:0 auto;padding:clamp(100px,16vh,170px) 24px 48px}
 .project-detail-intro h1{font-size:clamp(38px,7vw,76px);font-weight:400;letter-spacing:var(--heading-tracking);margin:0}
+/* The project heading shares its row with an outside link, the way the
+   director profile shares its row with LinkedIn. */
+.project-intro-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:clamp(24px,4vw,48px)}
+.project-link{margin:0;text-align:right;justify-self:end;padding-bottom:12px}
+.project-link .text-link{margin-top:0}
+@media(max-width:820px){
+.project-intro-head{grid-template-columns:1fr;row-gap:16px}
+.project-link{text-align:left;justify-self:start;padding-bottom:0}
+}
 .gallery{position:relative}
 .project-gallery{display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 clamp(20px,4vw,56px) 84px;scroll-snap-type:x mandatory;scroll-padding-inline:clamp(20px,4vw,56px)}
 .project-gallery:focus-visible{outline:2px solid var(--navy);outline-offset:-4px}
@@ -61,6 +70,14 @@
 .project-gallery>*{flex:0 0 min(72vw,760px);min-width:0;scroll-snap-align:start}
 .project-gallery img{display:block;width:100%;height:auto;object-fit:cover}
 @media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}.gallery-arrow{width:40px;height:40px;font-size:16px}}
+/* Phones take the same roomier side inset as the director profile, so the
+   heading and the images line up with that page. */
+@media(max-width:520px){
+.project-detail{--page-inset:clamp(28px,8.2vw,40px)}
+.project-detail-intro{padding-left:var(--page-inset);padding-right:var(--page-inset)}
+.project-gallery{padding-left:var(--page-inset);padding-right:var(--page-inset);scroll-padding-inline:var(--page-inset)}
+.gallery-nav{right:var(--page-inset)}
+}
 
 /* Typography: geometric sans-serif system stack, Gotham-adjacent. */
 /* Typography tokens.
