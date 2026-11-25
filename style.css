@@ -141,6 +141,8 @@ h1,h2,h3,.site-menu a{font-family:var(--font-heading);font-weight:400;letter-spa
    ("three line breaks", "two more") survives any font size change. */
 .home-intro{--lede-size:clamp(15px,1.5vw,18px);--lede-line:calc(var(--lede-size) * 1.7)}
 .home-intro h1{margin-bottom:0}
+.home-feature{margin:clamp(34px,5vw,64px) auto 0;width:min(100%,900px)}
+.home-feature img{display:block;width:100%;height:auto}
 .home-intro>p:last-child{margin:calc(var(--lede-line) * 3) auto 0;max-width:780px}
 
 /* Rebrand notice. First sentence stays italic, the qualifying line under it
