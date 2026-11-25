@@ -1,3 +1,7 @@
+document.addEventListener('contextmenu', (event) => {
+  if (event.target.closest('img')) event.preventDefault();
+});
+
 (() => {
   const toggle = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.site-menu');
