@@ -77,7 +77,8 @@
 .project-gallery:empty{min-height:0}
 .project-gallery>*{flex:0 0 min(72vw,760px);min-width:0;scroll-snap-align:start}
 .project-gallery img{display:block;width:100%;aspect-ratio:1.75;height:auto;object-fit:cover}
-@media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}.gallery-arrow{width:42px;height:42px;font-size:17px}}
+.project-gallery img.gallery-portrait{flex:0 0 auto;width:auto;height:min(41.15vw,434px);aspect-ratio:auto;object-fit:contain}
+@media(max-width:700px){.project-list{grid-template-columns:1fr;gap:24px}.project-detail-intro{padding-top:110px}.project-gallery>*{flex-basis:86vw}.project-gallery img.gallery-portrait{height:49.14vw}.gallery-arrow{width:42px;height:42px;font-size:17px}}
 /* Phones take the same roomier side inset as the director profile, so the
    heading and the images line up with that page. */
 @media(max-width:520px){
